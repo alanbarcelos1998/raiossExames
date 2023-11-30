@@ -1,0 +1,40 @@
+<h1 class="text-center mt-3">Cadastro de Exames</h1>
+
+    <form method="post" action="?page=exam&method=insert" >
+        <div class="container mt-4">
+            <div class="mb-3">
+                <label for="idestudo" class="form-label">ID do estudo</label>
+                <input type="text" class="form-control" id="idestudo" name="idestudo" required>
+            </div>
+            <div class="mb-3">
+                <label for="nomepaciente" class="col-sm-2 col-form-label">Nome do paciente</label>
+                <input type="text" class="form-control" id="nomepaciente" name="nomepaciente" required>
+            </div>
+            <div class="mb-3">
+                <label for="idpaciente" class="col-sm-2 col-form-label">ID do paciente</label>
+                <input type="text" class="form-control" id="idpaciente" name="idpaciente" required>
+            </div>
+            <div class="mb-3">
+                <label for="modalidade" class="col-sm-2 col-form-label">Modalidade</label>
+                <select class="form-select" aria-label="selecione modalidade" name="modalidade">
+                    <option selected value="ct">CT</option>
+                    <option value="cr">CR</option>
+                    <option value="mg">MG</option>
+                    <option value="ms">MS</option>
+                    <option value="us">US</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="dataestudo" class="col-sm-2 col-form-label">Data do estudo</label>
+                <input type="date" class="form-control" id="dataestudo" name="dataestudo" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="dataregistro" class="col-sm-2 col-form-label">Data de registro</label>
+                <input type="date" class="form-control" id="dataregistro" name="dataregistro" required>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Enviar">
+            </div>
+        </div>
+    </form>

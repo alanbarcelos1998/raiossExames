@@ -1,0 +1,76 @@
+<section>
+    <h1 class="mt-3 text-center">Exames</h1>
+
+    {% if datas %}
+    <nav class="navbar bg-body-tertiary container">
+        <div class="container-fluid">
+            <form class="d-flex" role="search" method="post" action="?page=exam&method=filter">
+                <input type="date" class="form-control me-4" name="dateregistroinit" id="dateregistroinit">
+                <input type="date" class="form-control me-4" name="dateregistrofinish" id="dateregistrofinish">
+                <select class="form-select me-4" aria-label="selecione modalidade" name="modalidade">
+                    <option selected value="">Filtro Modalidade</option>
+                    <option value="ct">CT</option>
+                    <option value="cr">CR</option>
+                    <option value="mg">MG</option>
+                    <option value="ms">MS</option>
+                    <option value="us">US</option>
+                </select>
+                <input class="form-control me-4" type="text" placeholder="Nome Paciente" name="search">
+                <button class="btn btn-outline-success me-4" type="submit">Filtrar</button>
+                <a href="http://locahost:85/?page=exam&method=index"><button class="btn btn-outline-success"
+                        type="submit">Limpar</button></a>
+            </form>
+        </div>
+    </nav>
+
+    
+    <div class="container">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">ID do Estudo</th>
+                    <th scope="col">Nome do Paciente</th>
+                    <th scope="col">ID do Paciente</th>
+                    <th scope="col">Modalidade</th>
+                    <th scope="col">Data do Estudo</th>
+                    <th scope="col">Data de Registro</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in datas %}
+                <tr>
+                    <td> {{data.id_estudo}} </td>
+                    <td> {{data.nome_paciente}} </td>
+                    <td> {{data.id_paciente}} </td>
+                    <td> {{data.modalidade}} </td>
+                    <td> {{data.data_estudo}} </td>
+                    <td> {{data.data_registro}} </td>
+                    <td>
+                        <a href="http://localhost:85/?page=exam&method=alter&id={{data.id}}">
+                            <button type="button" title="alterar" class="btn btn-secondary">
+                                <span class="material-symbols-outlined">
+                                    compare_arrows
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="http://localhost:85/?page=exam&method=delete&id={{data.id}}">
+                            <button type="button" title="excluir" class="btn btn-danger">
+                                <span class="material-symbols-outlined">
+                                    delete
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <h1 class="mt-3 text-center position-absolute top-50 start-50 translate-middle">Sem exames para visualizar</h1>
+    {% endif %}
+
+
+</section>

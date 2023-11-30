@@ -1,0 +1,47 @@
+services:
+    php:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        container_name: phpApache
+        restart: always
+        ports:
+            - 85:80
+        volumes:
+            - ./:/var/www/html/
+        networks:
+            - raioss
+    adminer:
+        container_name: adminer
+        image: adminer
+        restart: always
+        ports:
+            - 8080:8080
+        networks:
+            - raioss
+    mysql:
+        image: 'mariadb:latest'
+        container_name: 'testraioss'
+        ports:
+            - '${FORWARD_DB_PORT:-3306}:3306'
+        environment:
+            MARIADB_DATABASE: '${DB_DATABASE}'
+            MARIADB_USER: '${DB_USERNAME}'
+            MARIADB_PASSWORD: '${DB_PASSWORD}'
+            MARIADB_ROOT_PASSWORD: '${DB_PASSWORD}'
+        restart: always
+        volumes:
+            - './createTable.sql:/docker-entrypoint-initdb.d/init.sql'
+        healthcheck:
+            test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '-p${DB_PASSWORD}'
+            retries: 3
+            timeout: 5s
+        networks:
+            - raioss
+networks:
+    raioss:
+        driver: bridge
